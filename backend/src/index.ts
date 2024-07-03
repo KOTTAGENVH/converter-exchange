@@ -1,26 +1,21 @@
-import db from "./db";
-import bcrypt from "bcrypt";
-import express from "express";
+import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
-import cors from "cors";
-import bodyParser from "body-parser";
+import db from "./db";
+
+
+const app: Application = express();
 
 dotenv.config();
-const app = express();
 
-const allowedOrigins = [
-  "http://localhost:3000",
-];
-
-app.use(cors({ credentials: true, origin: allowedOrigins }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 db();
 
-app.listen(process.env.PORT || 5030, () => {
-  console.log(`Server is running on port ${process.env.PORT || 5030}`);
+// Default
+app.get("/api", (req: Request, res: Response) => {
+  res.status(201).json({ message: "Welcome to Auth ts" });
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, (): void => console.log(`Server is running on ${PORT}`));

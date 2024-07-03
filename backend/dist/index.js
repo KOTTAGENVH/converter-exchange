@@ -23,4 +23,4 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 exports.default = app;
-//# sourceMappingURL=server.js.map
+//# sourceMappingURL=index.js.map

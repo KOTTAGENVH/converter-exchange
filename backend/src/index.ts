@@ -13,15 +13,15 @@ const allowedOrigins = [
   ];
 
   
-  app.use(cors({ credentials: true, origin: allowedOrigins }));
-  app.use(bodyParser.json());
+  // app.use(cors({ credentials: true, origin: allowedOrigins }));
+  // app.use(bodyParser.json());
 
 
   
   db();
 
-  app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+  app.listen(process.env.PORT || 5030, () => {
+    console.log(`Server is running on port ${process.env.PORT || 5030}`);
   } );
 
   app.get("/", (req, res) => {

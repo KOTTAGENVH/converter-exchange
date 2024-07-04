@@ -4,27 +4,28 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
+import user_router from "./user/router/userRouter";
 
 dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-    "http://localhost:3000",
-  ];
-
-  
-  app.use(cors({ credentials: true, origin: allowedOrigins }));
-  app.use(bodyParser.json());
+  "http://localhost:3000",
+];
 
 
-  
-  db();
+app.use(cors({ credentials: true, origin: allowedOrigins }));
+app.use(bodyParser.json());
 
-  app.listen(process.env.PORT || 5030, () => {
-    console.log(`Server is running on port ${process.env.PORT || 5030}`);
-  } );
+app.use("/user", user_router);
+// Database connection
+db();
 
-  app.get("/", (req, res) => {
-    res.send("Hello World");
-  });
+app.listen(process.env.PORT || 5030, () => {
+  console.log(`Server is running on port ${process.env.PORT || 5030}`);
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 

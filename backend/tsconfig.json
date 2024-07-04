@@ -3,7 +3,11 @@
       "module": "commonjs",
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "target": "es6",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "strictPropertyInitialization": false,
+      "target": "ES6",
+      "lib": ["ES6"],
       "noImplicitAny": true,
       "moduleResolution": "node",
       "sourceMap": true,
@@ -13,5 +17,5 @@
           "*": ["node_modules/*", "src/types/*"]
       }
   },
-  "include": ["./src/**/*"]
-  }
+  "include": ["./src/**/*"],
+}

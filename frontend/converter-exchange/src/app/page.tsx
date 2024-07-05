@@ -35,7 +35,7 @@ export default function Home() {
     <div className="bg-white h-screen overflow-hidden">
       <LoginHeader />
       <div className="flex justify-center items-center h-full bg-darkerwhite">
-        <div className="box-content h-3/5 md:w-7/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mr-4 p-4">
+        <div className="box-content h-3/5 md:w-8/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mr-4 p-4">
           <h1 className="text-left text-xl md:text-3xl font-bold text-black mt-4">
             Welcome to Converter Exchange
           </h1>

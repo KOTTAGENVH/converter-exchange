@@ -1,4 +1,4 @@
-import { createUser, signIn, getUserByEmail, signOut } from "../service/userService";
+import { createUser, signIn, getUserByEmail, signOut, resetPassword, resetPasswordVerification, forgotPassword } from "../service/userService";
 import { CreateUserDto } from "../dto/userdto";
 import { Request, Response } from "express";
 
@@ -78,3 +78,65 @@ export const signOutController = async (req: Request, res: Response): Promise<vo
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+//forgot password
+export const forgotPasswordController = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { email } = req.body;
+        const user = await forgotPassword(email);
+        if (user === "User_not_found") {
+            res.status(404).json({ message: "User not found" });
+        } else if (user === "Something_went_wrong") {
+            res.status(500).json({ message: "Internal server error" });
+        } else {
+            res.status(200).json({ message: "Email sent successfully" });
+        }
+    } catch (error) {
+        console.error('Error sending email:', (error as Error).message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+//reset password
+export const resetPasswordController = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { email, password } = req.body;
+        const user = await resetPassword(email, password);
+        if (user === "User_not_found") {
+            res.status(404).json({ message: "User not found" });
+        } else if (user === "Invalid_password_format") {
+            res.status(400).json({ message: "Invalid password" });
+        } else if (user === "Something_went_wrong") {
+            res.status(500).json({ message: "Internal server error" });
+        } else if (user === "Token_not_verified") {
+            res.status(400).json({ message: "Token expired" });
+        }
+        else {
+            res.status(200).json({ message: "Password reset successfully" });
+        }
+    } catch (error) {
+        console.error('Error resetting password:', (error as Error).message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+//reset password verification
+export const resetPasswordVerificationController = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { token } = req.body;
+        const user = await resetPasswordVerification(token);
+        if (user === "User_not_found") {
+            res.status(404).json({ message: "User not found" });
+        } else if (user === "Token_expired") {
+            res.status(400).json({ message: "Token expired" });
+        } else if (user === "Something_went_wrong") {
+            res.status(500).json({ message: "Internal server error" });
+        } else {
+            res.status(200).json({ message: "Token verified successfully" });
+        }
+    } catch (error) {
+        console.error('Error verifying token:', (error as Error).message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+

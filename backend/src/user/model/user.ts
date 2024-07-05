@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { resetPassword } from '../service/userService';
 
 const Schema = mongoose.Schema;
 
@@ -35,6 +36,18 @@ const userSchema = new Schema({
     },
     refreshtoken: {
         type: String,
+        required: false,
+    },
+    resetpasswordtoken: {
+        type: String,
+        required: false,
+    },
+    resetpasswordexpires: {
+        type: Date,
+        required: false,
+    },
+    resetPasswordreq: {
+        type: Boolean,
         required: false,
     },
 });

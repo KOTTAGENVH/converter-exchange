@@ -16,7 +16,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+       <title>CONVERTER-EXCHANGE</title>
+      </head>
+      <body className={inter.className}>
+             {/*Ban inspect elements*/}
+             {/* <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener("contextmenu", function(event) {
+                event.preventDefault();
+                alert("Inspect Elements Not Allowed!");
+              });
+            `,
+          }}
+        /> */}
+        {children}
+        </body>
     </html>
   );
 }

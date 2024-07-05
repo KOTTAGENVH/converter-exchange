@@ -8,7 +8,7 @@ export class CreateTransferDto {
     receiveremail: string;
 
     @IsNumber()
-    amount?: number;
+    amount: number;
 
     @IsString()
     currency: String;

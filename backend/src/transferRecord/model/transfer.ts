@@ -37,10 +37,6 @@ const transferSchema = new Schema({
         type: String,
         default: 'USD'
     },
-    status: {
-        type: String,
-        required: true
-    },
     note: {
         type: String
     },

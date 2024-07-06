@@ -10,7 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { forgotPassword } from "@/src/Api/services/userService";
+import { verifyToken } from "@/src/Api/services/userService";
+import TokenInput from "@/src/components/tokeninput";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -19,19 +20,19 @@ export default function Page() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      token: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
+        token: Yup.string()
+        .matches(/^[0-9]*$/, "Token must be a number")
+        .required("Token is required"),
     }),
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await forgotPassword(values.email).then((response) => {
+        await verifyToken(values.token).then((response) => {
           console.log(response);
-          router.push("/tokenverify");
+          router.push("/resetpassword");
         });
         setLoading(false);
       } catch (error: any) {
@@ -56,14 +57,14 @@ export default function Page() {
         </div>
       )}
       <LoginHeader />
-      <div className="flex justify-center items-center h-full bg-darkerwhite ">
+      <div className="flex justify-center items-center h-full bg-darkerwhite">
         <div className="box-content h-max md:w-7/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mt-16 mr-4 p-4 ">
-          <a href="/" className="text-blue-500 text-sm mt-10 mb-4 ">
+          <a href="/forgotpassword" className="text-blue-500 text-sm mt-10 mb-4 ">
             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
-            Back to Login
+            Back
           </a>
           <h1 className="text-left text-xl md:text-3xl font-bold text-black mt-4">
-            Forgot Your Password?
+            Enter Token
           </h1>
           <hr className="mt-4" />
           <form onSubmit={formik.handleSubmit}>
@@ -73,20 +74,17 @@ export default function Page() {
                 className="text-left text-lg md:text-xl text-black text-gray-400"
                 htmlFor="email"
               >
-                Email*
+                Token*
               </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="w-full h-12 p-4 border-b-2 text-black border-gray-200 mt-2 focus:outline-none focus:border-b-2 focus:border-blue-500"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
+              <TokenInput
+                value={formik.values.token}
+                handleChange={(value) =>
+                  formik.setFieldValue("token", value)
+                }
               />
-              {formik.touched.email && formik.errors.email && (
+              {formik.touched.token && formik.errors.token && (
                 <div className="text-red-500 text-sm mt-2">
-                  {formik.errors.email}
+                  {formik.errors.token}
                 </div>
               )}
             </div>

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { signup } from "@/src/Api/services/userService";
+import { resetPassword} from "@/src/Api/services/userService";
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,8 +16,6 @@ export default function Page() {
 
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      last_name: "",
       email: "",
       password: "",
       confirm_password: "",
@@ -36,29 +34,11 @@ export default function Page() {
       confirm_password: Yup.string()
         .oneOf([Yup.ref("password"), undefined], "Passwords must match")
         .required("Confirm Password is required"),
-      first_name: Yup.string()
-        .matches(/^[a-zA-Z]+$/, "First Name must contain only letters")
-        .min(2, "First Name must be at least 2 characters")
-        .max(50, "First Name must be at most 50 characters")
-        .trim()
-        .transform(value => value.toUpperCase())
-        .strict(true)
-        .required("First Name is required"),
-      last_name: Yup.string()
-        .matches(/^[a-zA-Z]+$/, "Last Name must contain only letters")
-        .min(2, "Last Name must be at least 2 characters")
-        .max(50, "Last Name must be at most 50 characters")
-        .trim()
-        .transform(value => value.toUpperCase())
-        .strict(true)
-        .required("Last Name is required"),
     }),
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await signup(
-          values.first_name,
-          values.last_name,
+        await resetPassword(
           values.email,
           values.password
         ).then((response) => {
@@ -80,7 +60,7 @@ export default function Page() {
 
   return (
     <div
-      className={`bg-white h-screen ${loading ? "pointer-events-none" : ""} md: overflow-hidden`}
+      className={`bg-white h-screen ${loading ? "pointer-events-none" : ""} overflow-hidden`}
     >
       {loading && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
@@ -88,60 +68,13 @@ export default function Page() {
         </div>
       )}
       <LoginHeader />
-      <div className="flex justify-center items-center h-full bg-darkerwhite overflow-y-auto">
-        <div className="box-content h-max md:w-7/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mt-16 mr-4 p-4  ">
+      <div className="flex justify-center items-center h-full bg-darkerwhite ">
+        <div className="box-content h-max md:w-7/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mt-16 mr-4 p-4 ">
           <h1 className="text-left text-xl md:text-3xl font-bold text-black mt-4">
-            Welcome to Converter Exchange
+            Enter your new password
           </h1>
           <hr className="mt-4" />
           <form onSubmit={formik.handleSubmit}>
-            {/* FirstName and LastName */}
-            <div className="flex flex-wrap justify-between mt-4">
-              <div className="w-full md:w-5/12">
-                <label
-                  className="text-left text-lg md:text-xl text-black text-gray-400"
-                  htmlFor="first_name"
-                >
-                  First Name*
-                </label>
-                <input
-                  id="first_name"
-                  name="first_name"
-                  type="text"
-                  className="w-full h-12 p-4 border-b-2 text-black border-gray-200 mt-2 focus:outline-none focus:border-b-2 focus:border-blue-500"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.first_name}
-                />
-                {formik.touched.first_name && formik.errors.first_name && (
-                  <div className="text-red-500 text-sm mt-2">
-                    {formik.errors.first_name}
-                  </div>
-                )}
-              </div>
-              <div className="w-full md:w-5/12 mt-4 md:mt-0">
-                <label
-                  className="text-left text-lg md:text-xl text-black text-gray-400"
-                  htmlFor="last_name"
-                >
-                  Last Name*
-                </label>
-                <input
-                  id="last_name"
-                  name="last_name"
-                  type="text"
-                  className="w-full h-12 p-4 border-b-2 text-black border-gray-200 mt-2 focus:outline-none focus:border-b-2 focus:border-blue-500"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.last_name}
-                />
-                {formik.touched.last_name && formik.errors.last_name && (
-                  <div className="text-red-500 text-sm mt-2">
-                    {formik.errors.last_name}
-                  </div>
-                )}
-              </div>
-            </div>
             {/* Email */}
             <div className="mt-4">
               <label

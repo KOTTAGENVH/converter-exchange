@@ -6,11 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { forgotPassword } from "../Api/services/userService";
+import { signin } from "../Api/services/userService";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "./global_redux/feature/user_slice";
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
+  
   const router = useRouter();
 
   const formik = useFormik({
@@ -30,13 +35,44 @@ export default function Home() {
         )
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
-      // Handle form submission
-    },
+    onSubmit: async (values) => {
+      try {
+      setLoading(true);
+      await signin(
+        values.email,
+        values.password
+      ).then(async (response) => {
+        console.log(response.data?.result);
+        if (response.data?.result) {
+          try{
+        await dispatch(setUserDetails(response.data.result));
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        router.push("/home");
+      });
+      setLoading(false);
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
+      console.log(error);
+      setLoading(false);
+    }
+    }
   });
   return (
-    <div className="bg-white h-screen overflow-hidden">
+    <div 
+    className={`bg-white h-screen ${loading ? "pointer-events-none" : ""} md: overflow-hidden `}
+    >
+       {loading && (
+        <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        </div>
+      )}
       <LoginHeader />
       <div className="flex justify-center items-center h-full bg-darkerwhite overflow-y-auto">
         <div className="box-content h-3/5 md:w-7/12 w-screen bg-white rounded-2xl md:mb-40 mb-40 ml-4 mr-4 p-4 overflow-y-auto">
@@ -114,6 +150,7 @@ export default function Home() {
               <button
                 type="submit"
                 className="w-52 h-12 bg-blue-500 text-white rounded-lg mt-8"
+                disabled={loading}
               >
                 Submit
               </button>

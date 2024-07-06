@@ -20,6 +20,18 @@ export const signup = async (
   }
 };
 
+//signin 
+export const signin = async (email: string, password: string) => {
+  try {
+    const response = await apiClient.post("/user/signin", {
+      email: email,
+      password: password,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 //Forgot password token request
 export const forgotPassword = async (email: string) => {

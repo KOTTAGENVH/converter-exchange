@@ -6,13 +6,13 @@ export const customEmail = async (email: string, subject: string, body: string):
         let mailTransporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "tourme6@gmail.com",
-                pass: "sovglduxluqutwot"
+                user: process.env.email,
+                pass: process.env.emailPass
             }
         });
 
         let mailDetails = {
-            from: "tourme6@gmail.com",
+            from: process.env.email,
             to: email,
             subject: subject,
             text: body

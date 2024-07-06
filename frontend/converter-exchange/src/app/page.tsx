@@ -4,10 +4,14 @@ import LoginHeader from "../components/loginheader";
 import { useFormik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 import * as Yup from "yup";
+import { forgotPassword } from "../Api/services/userService";
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +26,7 @@ export default function Home() {
         .min(6, "Password must be at least 6 characters")
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
-          'Password must contain at least one letter and one number'
+          "Password must contain at least one letter and one number"
         )
         .required("Password is required"),
     }),
@@ -100,18 +104,19 @@ export default function Home() {
               Forgot password?
             </a>
             <div className="flex items-center justify-center md:justify-between flex-wrap">
-            <button
-              type="submit"
-              className="w-52 h-12 bg-blue-500 text-white rounded-lg mt-8"
-            >
-              Sign Up
-            </button>
-            <button
-              type="submit"
-              className="w-52 h-12 bg-blue-500 text-white rounded-lg mt-8"
-            >
-              Submit
-            </button>
+              <button
+                type="button"
+                className="w-52 h-12 bg-blue-500 text-white rounded-lg mt-8"
+                onClick={() => router.push("/signup")}
+              >
+                Sign Up
+              </button>
+              <button
+                type="submit"
+                className="w-52 h-12 bg-blue-500 text-white rounded-lg mt-8"
+              >
+                Submit
+              </button>
             </div>
           </form>
         </div>

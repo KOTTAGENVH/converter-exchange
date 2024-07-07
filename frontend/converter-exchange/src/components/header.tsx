@@ -7,7 +7,7 @@ function Header() {
     const router = useRouter();
 
   const handleLogoClick = () => {
-    router.push("/");
+    router.push("/home");
   };
 
   const handleProfileClick = () => {

@@ -10,7 +10,7 @@ import { getExchangeRates } from "@/src/Api/services/exchageRateService";
 function Page() {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isCurrency, setCurrency] = useState<string>("");
+  const [isCurrency, setCurrency] = useState<string>("USD");
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getExchangeRates(isCurrency),
@@ -41,7 +41,9 @@ function Page() {
         <FontAwesomeIcon icon={faBars} />
       </button>
       <Drawer isOpen={isOpen} toggleDrawer={toggleDrawer} />
-      <button onClick={() => setCurrency("USD")}>USD</button>
+     <div>
+      
+     </div>
     </div>
   );
 }

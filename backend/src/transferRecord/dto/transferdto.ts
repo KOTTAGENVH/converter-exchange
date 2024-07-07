@@ -10,8 +10,14 @@ export class CreateTransferDto {
     @IsNumber()
     amount: number;
 
+    @IsNumber()
+    amountfrom: number;
+
     @IsString()
     currency: String;
+
+    @IsString()
+    currencyfrom: String;
 
     @IsString()
     note: String;

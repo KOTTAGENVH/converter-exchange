@@ -3,7 +3,7 @@
 export const getExchangeRates = async (currency: string) => {
   try {
     const response = await fetch(
-      `https://open.er-api.com/v6/latest/${currency}`
+      `https://v6.exchangerate-api.com/v6/003f3f72de778a176381b3e9/latest/${currency}`
     );
 
     if (!response.ok) {

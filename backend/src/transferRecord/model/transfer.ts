@@ -33,7 +33,15 @@ const transferSchema = new Schema({
         type: Number,
         required: true
     },
+    amountfrom: {
+        type: Number,
+        required: true
+    },
     currency: {
+        type: String,
+        default: 'USD'
+    },
+    currencyfrom: {
         type: String,
         default: 'USD'
     },

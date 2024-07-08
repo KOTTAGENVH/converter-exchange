@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './feature/user_slice';
+import drawerReducer from './feature/drawe_slice';
 
 // Configuration for redux-persist
 const persistConfig = {
@@ -11,11 +12,13 @@ const persistConfig = {
   blacklist: ['result'], 
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const userpersistedReducer = persistReducer(persistConfig, userReducer);
+const drawerPersistedReducer = persistReducer(persistConfig, drawerReducer);
 
 const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    user: userpersistedReducer,
+    drawer: drawerPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

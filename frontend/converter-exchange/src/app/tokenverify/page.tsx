@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { verifyToken } from "@/src/Api/services/userService";
+import { verifyToken } from "@/src/api/services/userService";
 import TokenInput from "@/src/components/tokeninput";
 
 export default function Page() {
@@ -31,7 +31,6 @@ export default function Page() {
       try {
         setLoading(true);
         await verifyToken(values.token).then((response) => {
-          console.log(response);
           router.push("/resetpassword");
         });
         setLoading(false);

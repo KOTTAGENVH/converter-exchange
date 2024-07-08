@@ -69,3 +69,20 @@ export const resetPassword = async (email: string, password: string) => {
     throw error;
   }
 };
+
+//logout
+export const Logout = async (email:string, token:string, refreshToken: string) => {
+  try {
+    const response = await apiClient.post("/user/signout", {
+      email: email,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Refreshtoken': refreshToken,
+      },
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

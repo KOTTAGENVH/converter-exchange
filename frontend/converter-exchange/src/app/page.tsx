@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { signin } from "../Api/services/userService";
+import { signin } from "../api/services/userService";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "./global_redux/feature/user_slice";
 
@@ -42,7 +42,6 @@ export default function Home() {
         values.email,
         values.password
       ).then(async (response) => {
-        console.log(response.data?.result);
         if (response.data?.result) {
           try{
         await dispatch(setUserDetails(response.data.result));

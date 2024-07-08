@@ -33,7 +33,7 @@ const getInitialUserState = (): UserState => {
 };
 
 export const userSlice = createSlice({
-  name: "user-details",
+  name: "userdetails",
   initialState: getInitialUserState(),
   reducers: {
     setUserDetails: (state, action: PayloadAction<UserState>) => {

@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from "express";
 import User from '../user/model/user';
 
@@ -9,43 +9,51 @@ interface CustomRequestVerify extends Request {
 interface JwtPayload {
     id: string;
     email: string;
-  }
+}
 
 export const verifyToken = async (req: CustomRequestVerify, res: Response, next: NextFunction): Promise<void> => {
-    const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization as string;
     const refreshToken = req.headers.refreshtoken as string;
-    var { email } = req.body;
+    const { email } = req.body;
+    
     if (!authHeader) {
-         res.status(403).json({ message: "No token provided" });
-         return;
+        res.status(403).json({ message: "No token provided" });
+        return;
     }
 
-    const token = authHeader.split('.')[1];
     try {
-        const decoded = jwt.verify(authHeader, process.env.secret) as JwtPayload;
+        // Extract token from "Bearer <token>" format
+        const token = authHeader.split(' ')[1];
+        
+        // Verify access token
+        const decoded = jwt.verify(token, process.env.secret) as JwtPayload;
+
+        // Validate email
+        if (email !== decoded.email) {
+            res.status(401).json({ message: "Unauthorized" });
+            return;
+        }
+
+        // Attach user ID to request for further middleware
         req.userId = decoded.id;
-        req.userId = decoded.id;
-       if(email != decoded.email){
-        res.status(401).json({ message: "Unauthorized" });
-        return;
-       }
-        console.log('req.userId:', req.body.email);
-        console.log('decoded:', decoded);
         next();
     } catch (error) {
-        if (error instanceof jwt.TokenExpiredError) {
+        if (error instanceof TokenExpiredError) {
+            // Handle expired token scenario
             if (!refreshToken) {
-              res.status(403).json({ message: "No refresh token provided" });
+                res.status(403).json({ message: "No refresh token provided" });
                 return;
             }
 
             try {
+                // Verify refresh token
                 const decodedRefresh = jwt.verify(refreshToken, process.env.refreshtoken) as { id: string };
 
+                // Check if refresh token matches user's stored refresh token
                 const user = await User.findById(decodedRefresh.id);
                 if (!user || user.refreshtoken !== refreshToken) {
-                     res.status(403).json({ message: "Invalid refresh token" });
-                     return;
+                    res.status(403).json({ message: "Invalid refresh token" });
+                    return;
                 }
 
                 // Generate new access token
@@ -54,15 +62,17 @@ export const verifyToken = async (req: CustomRequestVerify, res: Response, next:
                 res.setHeader('Authorization', `Bearer ${newAccessToken}`);
                 next();
             } catch (refreshError) {
-                 res.status(401).json({ message: "Unauthorized" });
-                 return;
-            }
-        } else if (error instanceof jwt.JsonWebTokenError) {
-            console.error('Error verifying token:', (error as Error).message);
-             res.status(401).json({ message: 'Invalid token' });
+                res.status(401).json({ message: "Unauthorized" });
                 return;
+            }
+        } else if (error instanceof JsonWebTokenError) {
+            // Handle other JWT errors
+            console.error('Error verifying token:', (error as Error).message);
+            res.status(401).json({ message: 'Invalid token' });
+            return;
         }
-         res.status(401).json({ message: 'Unauthorized' });
-         return null;
+
+        // Default unauthorized response
+        res.status(401).json({ message: 'Unauthorized' });
     }
 };

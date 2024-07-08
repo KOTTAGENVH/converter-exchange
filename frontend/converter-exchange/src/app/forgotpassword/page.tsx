@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { forgotPassword } from "@/src/Api/services/userService";
+import { forgotPassword } from "@/src/api/services/userService";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,6 @@ export default function Page() {
       try {
         setLoading(true);
         await forgotPassword(values.email).then((response) => {
-          console.log(response);
           router.push("/tokenverify");
         });
         setLoading(false);

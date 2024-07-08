@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import LoginHeader from "@/src/components/loginheader";
+import LoginHeader from "../../components/loginheader";
 import { useFormik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { verifyToken } from "../../api/services/userService";
-import TokenInput from "@/src/components/tokeninput";
+import TokenInput from "../../components/tokeninput";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);

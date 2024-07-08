@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import LoginHeader from "@/src/components/loginheader";
+import LoginHeader from "../../components/loginheader";
 import { useFormik } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { forgotPassword } from "@/src/api/services/userService";
+import { forgotPassword } from "../../api/services/userService";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -45,7 +43,9 @@ export default function Page() {
 
   return (
     <div
-      className={`bg-white h-screen ${loading ? "pointer-events-none" : ""} overflow-hidden`}
+      className={`bg-white h-screen ${
+        loading ? "pointer-events-none" : ""
+      } overflow-hidden`}
     >
       {loading && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">

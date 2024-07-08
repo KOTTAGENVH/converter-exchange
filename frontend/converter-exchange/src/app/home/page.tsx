@@ -1,7 +1,7 @@
 "use client";
-import Header from "@/src/components/header";
+import Header from "../../components/header";
 import React, { useEffect, useState } from "react";
-import Drawer from "@/src/components/drawer";
+import Drawer from "../../components/drawer";
 import { useQuery } from "react-query";
 import { getExchangeRates } from "../../api/services/exchageRateService";
 import { useDispatch, useSelector } from "react-redux";

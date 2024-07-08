@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Logout } from "../api/services/userService";
+import { Logout } from "../app/api/services/userService";
 import { useSelector } from "react-redux";
 
 interface DrawerProps {

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { forgotPassword } from "../../api/services/userService";
+import { forgotPassword } from "../api/services/userService";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);

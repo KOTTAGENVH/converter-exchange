@@ -5,7 +5,6 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Drawer from "@/src/components/drawer";
 import { useQuery } from "react-query";
 import { getExchangeRates } from "@/src/api/services/exchageRateService";
-import { RootState } from "@/src/app/global_redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setDrawer } from "../global_redux/feature/drawe_slice";
 import { useFormik } from "formik";
@@ -19,7 +18,7 @@ function Page() {
   const [isconvertedvalue, setConvertedValue] = useState<string>("");
 
   const dispatch = useDispatch();
-  const drawerState = useSelector((state: RootState) => state.drawer.status);
+  const drawerState = useSelector((state: any) => state.drawer.status);
 
   const formik = useFormik({
     initialValues: {

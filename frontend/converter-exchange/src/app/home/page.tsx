@@ -47,7 +47,7 @@ function Page() {
 
   return (
     <div
-      className={`bg-white h-max overflow-hidden ${
+      className={`bg-white h-screen overflow-y-auto ${
         loading ? "pointer-events-none" : ""
       }  `}
     >
@@ -58,7 +58,7 @@ function Page() {
       )}
       <Header />
       <Drawer isOpen={drawerState} toggleDrawer={toggleDrawer} />
-      <div className="h-screen  overflow-y-auto md: overflow-hidden">
+      <div className="h-auto  overflow-y-auto md: overflow-hidden">
         <div className="flex flex-row items-center justify-center flex-wrap w-screen">
           <div className="flex flex-col w-full md:w-2/4">
             <p className="text-2xl font-bold text-black m-3">

@@ -23,14 +23,16 @@ function Page() {
 
   const formik = useFormik({
     initialValues: {
-      amount: "",
+      amount: 0,
       currencyFrom: "",
       currencyTo: "",
     },
     validationSchema: Yup.object().shape({
       amount: Yup.number()
-        .required("Amount is required")
-        .positive("Amount must be positive"),
+      .typeError("Amount must be a number")
+      .required("Amount is required")
+      .positive("Amount must be positive")
+      .integer("Amount must be an integer"),
       currencyFrom: Yup.string().required("Currency is required"),
       currencyTo: Yup.string().required("Currency to convert is required"),
     }),
@@ -47,7 +49,7 @@ function Page() {
   useEffect(() => {
     if (isCurrency && data && !isLoading && !isError) {
       const rate = data.conversion_rates[selectedCurrency];
-      const amount = parseFloat(formik.values.amount);
+      const amount = formik.values.amount;
       setConvertedValue((amount * rate).toFixed(2));
     }
   }, [
@@ -194,7 +196,7 @@ function Page() {
               <div className="flex flex-row justify-center items-center w-8/12 p-4">
                 <button
                   className="bg-blue-500 text-white p-2 rounded-lg w-full m-2 hover:bg-blue-700"
-                  onClick={() => setCurrencyValue("USD")}
+                  type="submit"
                 >
                   Transfer
                 </button>

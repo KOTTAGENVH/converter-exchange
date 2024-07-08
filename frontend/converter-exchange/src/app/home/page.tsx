@@ -3,7 +3,7 @@ import Header from "@/src/components/header";
 import React, { useEffect, useState } from "react";
 import Drawer from "@/src/components/drawer";
 import { useQuery } from "react-query";
-import { getExchangeRates } from "@/src/api/services/exchageRateService";
+import { getExchangeRates } from "../api/services/exchageRateService";
 import { useDispatch, useSelector } from "react-redux";
 import { setDrawer } from "../global_redux/feature/drawe_slice";
 import { useFormik } from "formik";

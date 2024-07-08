@@ -12,6 +12,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://converter-exchange.vercel.app",
+  "https://converter-exchange-kottagenvhs-projects.vercel.app",
+  "https://converter-exchange-git-main-kottagenvhs-projects.vercel.app",
 ];
 
 

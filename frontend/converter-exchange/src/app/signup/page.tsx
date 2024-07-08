@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { signup } from "@/src/api/services/userService";
+import { signup } from "../../api/services/userService";
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false);

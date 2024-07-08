@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { verifyToken } from "@/src/api/services/userService";
+import { verifyToken } from "../../api/services/userService";
 import TokenInput from "@/src/components/tokeninput";
 
 export default function Page() {

@@ -8,6 +8,4 @@ const apiClient = axios.create({
     Accept: "application/json",
   },
 });
-// https://tecsota-assessment.vercel.app
-// http://localhost:5050
 export { apiClient };

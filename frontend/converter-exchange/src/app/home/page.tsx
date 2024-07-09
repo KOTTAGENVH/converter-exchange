@@ -27,7 +27,6 @@ function Page() {
   // Redirect to home if user is not authenticated
   useEffect(() => {
     if (!user || !user._id || !user.token || !user.refreshtoken) {
-      console.log("user", user)
       router.push("/");
     }
   }, [user, router]);
@@ -73,6 +72,7 @@ function Page() {
           user.refreshtoken
         );
         setLoading(false);
+        router.push("/my_transfers")
       } catch (error) {
         setLoading(false);
         alert("Error in transfer");

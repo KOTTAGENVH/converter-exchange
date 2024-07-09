@@ -16,7 +16,6 @@ const getInitialUserState = (): UserState => {
   if (typeof localStorage !== "undefined") {
     const persistedState = localStorage.getItem("persistroot");
     if (persistedState) {
-      console.log("JSON.parse(persistedState)", JSON.parse(persistedState));
       return JSON.parse(persistedState);
     }
   }

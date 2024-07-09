@@ -42,6 +42,7 @@ export const addTransferRequest = async (
 };
 
 //Get Transfer History of user
+
 export const getTransferHistory = async (
   userId: string,
   email: string,
@@ -49,19 +50,14 @@ export const getTransferHistory = async (
   refreshToken: string
 ) => {
   try {
-    const response = await apiClient.post(
-      `/transfer/gettransfers/${userId}`,
-      {
+    const response = await apiClient.get(`/transfer/gettransfers/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Refreshtoken: refreshToken,
         email: email,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Refreshtoken: refreshToken,
-        },
-      }
-    );
-    return response;
+    });
+    return response; 
   } catch (error) {
     throw error;
   }

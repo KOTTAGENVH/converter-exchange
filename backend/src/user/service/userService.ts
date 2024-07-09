@@ -76,7 +76,8 @@ export const signIn = async (email: String, password: any) => {
 
         const token = jwt.sign({ email: user.email, id: user._id }, process.env.secret, { expiresIn: '1h' });
         const refreshToken = jwt.sign({ email: user.email, id: user._id }, process.env.refreshtoken, { expiresIn: '10h' });
-
+       console.log("user token", token)
+       console.log("user refreshtoken", refreshToken)
         user.token = token;
         user.refreshtoken = refreshToken;
         await user.save();

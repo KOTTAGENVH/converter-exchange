@@ -204,7 +204,7 @@ export default function Page() {
   }
 
   return (
-    <div className={`bg-white h-max ${loading ? "pointer-events-none" : ""} overflow-y-auto overflow-x-hidden`}>
+    <div className={`bg-gradient-to-b from-cyan-50 to-blue-100 h-max ${loading ? "pointer-events-none" : ""} overflow-y-auto overflow-x-hidden`}>
       {(loading || isLoading) && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -216,10 +216,10 @@ export default function Page() {
         <div className="flex flex-col md:flex-row justify-evenly bg-slate-50 md:bg-transparent mb-4 md:flex-wrap w-full h-max">
           {user?.email && user?.firstName && user?.lastName ? (
             <div className="flex flex-col w-full md:w-1/2 justify-center p-6">
-              <p className="text-xl md:text-2xl font-bold text-gray-800 bg-slate-50 m-8 rounded-3xl text-center p-6 md:shadow-xl">
+              <p className="text-xl md:text-2xl font-bold text-gray-800 bg-slate-50 md:m-8 rounded-3xl text-center p-6 md:shadow-xl">
                 Name: {user.firstName} {user.lastName}
               </p>
-              <p className="text-xl md:text-2xl font-bold text-gray-800 bg-slate-50 m-8 rounded-3xl text-center p-6 md:shadow-xl">
+              <p className="text-xl md:text-2xl font-bold text-gray-800 bg-slate-50 md:m-8 rounded-3xl text-center p-6 md:shadow-xl">
                 Email: {user.email}
               </p>
             </div>

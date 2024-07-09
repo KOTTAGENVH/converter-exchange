@@ -10,7 +10,6 @@ interface DrawerProps {
 }
 
 function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
-  
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const user = useSelector((state: any) => state.user);
@@ -29,16 +28,18 @@ function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
   const logout = async () => {
     try {
       await Logout(user?.email, user?.token, user?.refreshtoken).then(() => {
-        dispatch(setUserDetails({
-          _id: "",
-          email: "",
-          firstName: "",
-          lastName: "",
-          token: "",
-          refreshtoken: "",
-        }));
-      router.push("/");
-      } );
+        dispatch(
+          setUserDetails({
+            _id: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            token: "",
+            refreshtoken: "",
+          })
+        );
+        router.push("/");
+      });
     } catch (error) {
       alert("Error logging out");
     }
@@ -50,7 +51,7 @@ function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
     <div
       className={`fixed top-0 left-0 w-64 h-full bg-white bg-opacity-50 backdrop-blur-lg border border-opacity-20 shadow-lg text-white transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 ease-in-out flex flex-col`}
+      } transition-transform duration-300 ease-in-out flex flex-col z-50`}
     >
       <button
         className="absolute top-4 right-4 text-2xl text-black"
@@ -60,26 +61,26 @@ function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
       </button>
       <div className="p-4 flex-grow">
         <h2 className="text-m font-bold text-black mb-4">CONVERTER EXCHANGE</h2>
-        <hr className="shadow-lg font-bold"/>
-        <button 
-        className="w-full text-black hover:bg-sky-50  py-2 px-4 rounded"
-        onClick={() => navigatePage("/home")}
+        <hr className="shadow-lg font-bold" />
+        <button
+          className="w-full text-black hover:bg-sky-50  py-2 px-4 rounded"
+          onClick={() => navigatePage("/home")}
         >
-        Convert & Transfer
+          Convert & Transfer
         </button>
-        <hr className="shadow-lg font-bold"/>
-        <button 
-        className="w-full text-black hover:bg-sky-50  py-2 px-4 rounded"
-        onClick={() => navigatePage("/my_transfers")}
+        <hr className="shadow-lg font-bold" />
+        <button
+          className="w-full text-black hover:bg-sky-50  py-2 px-4 rounded"
+          onClick={() => navigatePage("/my_transfers")}
         >
           View My Transfers
         </button>
-        <hr className="shadow-lg font-bold"/>
+        <hr className="shadow-lg font-bold" />
       </div>
       <div className="p-4">
-        <button 
-        className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-        onClick={logout}
+        <button
+          className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+          onClick={logout}
         >
           Logout
         </button>

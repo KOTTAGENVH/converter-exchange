@@ -204,7 +204,7 @@ export default function Page() {
   }
 
   return (
-    <div className={`bg-gradient-to-b from-cyan-50 to-blue-100 h-max ${loading ? "pointer-events-none" : ""} overflow-y-auto overflow-x-hidden`}>
+    <div className={`bg-white h-max ${loading ? "pointer-events-none" : ""} overflow-y-auto overflow-x-hidden`}>
       {(loading || isLoading) && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -243,7 +243,7 @@ export default function Page() {
             </div>
           )}
         </div>
-        <div className="flex flex-col w-screen justify-center p-6 h-max">
+        <div className="flex flex-1 overflow-y-auto overflow-x-hidden">
         <MaterialReactTable table={table} />
         </div>
       </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Logout } from "../app/api/services/userService";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserDetails } from "../app/global_redux/feature/user_slice";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -9,9 +10,12 @@ interface DrawerProps {
 }
 
 function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
+  
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const user = useSelector((state: any) => state.user);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsClient(true);
@@ -25,7 +29,14 @@ function Drawer({ isOpen, toggleDrawer }: DrawerProps) {
   const logout = async () => {
     try {
       await Logout(user?.email, user?.token, user?.refreshtoken).then(() => {
-      localStorage.removeItem("persistroot");
+        dispatch(setUserDetails({
+          _id: "",
+          email: "",
+          firstName: "",
+          lastName: "",
+          token: "",
+          refreshtoken: "",
+        }));
       router.push("/");
       } );
     } catch (error) {

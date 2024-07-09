@@ -24,6 +24,7 @@ const generateUniqueCode = async (): Promise<string> => {
 //add transfer record
 export const addTransfer = async (transfer: CreateTransferDto) => {
 
+    console.log("transfer", transfer)
     // Validate receiver email
     if (!validator.isEmail(transfer.receiveremail)) {
         return "Invalid_email";
@@ -46,16 +47,18 @@ export const addTransfer = async (transfer: CreateTransferDto) => {
         date: Date.now(),
         sender: exsistinguser.firstName + " " + exsistinguser.lastName,
         senderemail: exsistinguser.email,
-        receiver: transfer.reciever,
+        receiver: transfer.receiver,
         receiveremail: transfer.receiveremail,
         amount: transfer.amount,
+        amountfrom: transfer.amountfrom,
         currency: transfer.currency,
+        currencyfrom: transfer.currencyfrom,
         note: transfer.note,
         userId: exsistinguser._id
     });
     try {
-        await customEmail(exsistinguser.email, "Transfer Completed!", " You have successfully transferred " + uniqueTransferId + "" + transfer.amount + " " + transfer.currency + " to " + transfer.reciever + "!");
-        await customEmail(transfer.receiveremail, "Transfer Completed!", " You have successfully transferred " + uniqueTransferId + "" + transfer.amount + " " + transfer.currency + " to " + transfer.reciever + "!");
+        await customEmail(exsistinguser.email, "Transfer Completed!", " You have successfully transferred " + uniqueTransferId + "" + transfer.amount + " " + transfer.currency + " to " + transfer.receiver + "!");
+        await customEmail(transfer.receiveremail, "Transfer Completed!", " You have successfully transferred " + uniqueTransferId + "" + transfer.amount + " " + transfer.currency + " to " + transfer.receiver + "!");
         await newTransfer.save();
     } catch (error) {
         console.error('Error adding transfer:', (error as Error).message);

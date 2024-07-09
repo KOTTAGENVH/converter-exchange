@@ -2,7 +2,7 @@ import { IsEmail, IsString, IsNumber } from 'class-validator';
 
 export class CreateTransferDto {
     @IsString()
-    reciever: String;
+    receiver: String;
 
     @IsEmail()
     receiveremail: string;
@@ -25,8 +25,8 @@ export class CreateTransferDto {
     @IsString()
     userId: String;
 
-    constructor(reciever: String, receiveremail: string, amount: number, currency: String, note: String, userId: String) {
-        this.reciever = reciever;
+    constructor(receiver: String, receiveremail: string, amount: number, currency: String, note: String, userId: String) {
+        this.receiver = receiver;
         this.receiveremail = receiveremail;
         this.amount = amount;
         this.currency = currency;

@@ -206,7 +206,7 @@ function Page() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-slate-50 m-4 rounded-lg w-full md:w-2/5 ">
+              <div className="flex flex-col bg-slate-50 m-4 rounded-3xl w-full md:w-2/5 md:shadow-md">
                 <p className="text-2xl font-bold text-black m-3">
                   Converted Amount in {isCurrency} -&gt; {selectedCurrency}
                 </p>
@@ -238,7 +238,7 @@ function Page() {
               selectedCurrency &&
               isCurrency && (
                 <div className="flex items-center justify-center h-auto bg-slate-50 md:bg-transparent">
-                  <div className="flex flex-col flex-wrap w-screen md:w-8/12 justify-center items-center mt-2 mb-2 md:rounded-lg bg-slate-50 ">
+                  <div className="flex flex-col flex-wrap w-screen md:w-4/12 md:shadow-md justify-center items-center mt-2 mb-2 md:rounded-3xl bg-slate-50 ">
                     <p className="text-2xl font-bold text-black m-3">
                       Transfer Money
                     </p>

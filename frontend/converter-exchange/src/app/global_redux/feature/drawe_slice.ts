@@ -7,18 +7,13 @@ interface DrawerState {
 }
 
 const getInitialDrawerState = (): DrawerState => {
-  // Check if localStorage is available
   if (typeof localStorage !== "undefined") {
-    const persistedState = localStorage.getItem("persistroot");
+    const persistedState = localStorage.getItem("drawerState");
     if (persistedState) {
       return JSON.parse(persistedState);
     }
   }
-
-  // If localStorage is not available or persisted state doesn't exist, use the default initial state
-  return {
-    status: false,
-  };
+  return { status: false };
 };
 
 export const drawerSlice = createSlice({
@@ -26,10 +21,11 @@ export const drawerSlice = createSlice({
   initialState: getInitialDrawerState(),
   reducers: {
     setDrawer: (state, action: PayloadAction<DrawerState>) => {
-      return {
-        ...state,
-        status: action.payload.status,
-      };
+      const newState = { ...state, status: action.payload.status };
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("drawerState", JSON.stringify(newState));
+      }
+      return newState;
     },
   },
 });

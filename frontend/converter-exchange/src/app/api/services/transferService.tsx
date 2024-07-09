@@ -57,7 +57,31 @@ export const getTransferHistory = async (
         email: email,
       },
     });
-    return response; 
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//Delete Transfer
+export const deleteTransfer = async (
+  transferId: string,
+  email: string,
+  token: string,
+  refreshToken: string
+) => {
+  try {
+    const response = await apiClient.delete(
+      `/transfer/deletetransfer/${transferId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Refreshtoken: refreshToken,
+          email: email,
+        },
+      }
+    );
+    return response;
   } catch (error) {
     throw error;
   }

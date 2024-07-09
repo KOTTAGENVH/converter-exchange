@@ -1,9 +1,9 @@
-"use client";
+'use client';
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import userReducer from './feature/user_slice';
-import drawerReducer from './feature/drawe_slice';
+import drawerReducer from '../global_redux/feature/drawe_slice';
 
 // Custom storage for client-side
 const createNoopStorage = () => ({
@@ -23,15 +23,20 @@ const storage =
     ? createWebStorage("local")
     : createNoopStorage();
 
-// Configuration for redux-persist
-const persistConfig = {
-  key: 'root',
+// Configuration for user slice persistence
+const userPersistConfig = {
+  key: 'user',
   storage,
-  blacklist: ['result'], 
 };
 
-const userPersistedReducer = persistReducer(persistConfig, userReducer);
-const drawerPersistedReducer = persistReducer(persistConfig, drawerReducer);
+// Configuration for drawer slice persistence
+const drawerPersistConfig = {
+  key: 'drawer',
+  storage,
+};
+
+const userPersistedReducer = persistReducer(userPersistConfig, userReducer);
+const drawerPersistedReducer = persistReducer(drawerPersistConfig, drawerReducer);
 
 const store = configureStore({
   reducer: {

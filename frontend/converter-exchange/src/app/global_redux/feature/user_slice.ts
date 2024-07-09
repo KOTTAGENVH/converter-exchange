@@ -12,23 +12,13 @@ interface UserState {
 }
 
 const getInitialUserState = (): UserState => {
-  // Check if localStorage is available
   if (typeof localStorage !== "undefined") {
-    const persistedState = localStorage.getItem("persistroot");
+    const persistedState = localStorage.getItem("userState");
     if (persistedState) {
       return JSON.parse(persistedState);
     }
   }
-
-  // If localStorage is not available or persisted state doesn't exist, use the default initial state
-  return {
-    _id: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    token: "",
-    refreshtoken: "",
-  };
+  return { _id: "", email: "", firstName: "", lastName: "", token: "", refreshtoken: "" };
 };
 
 export const userSlice = createSlice({
@@ -36,7 +26,7 @@ export const userSlice = createSlice({
   initialState: getInitialUserState(),
   reducers: {
     setUserDetails: (state, action: PayloadAction<UserState>) => {
-      return {
+      const newState = {
         ...state,
         _id: action.payload._id,
         email: action.payload.email,
@@ -45,6 +35,10 @@ export const userSlice = createSlice({
         token: action.payload.token,
         refreshtoken: action.payload.refreshtoken,
       };
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("userState", JSON.stringify(newState));
+      }
+      return newState;
     },
   },
 });

@@ -7,6 +7,6 @@ const transfer_router = Router();
 transfer_router.post("/addtransfer", verifyToken, addTransferController);
 transfer_router.get('/gettransfers/:userId', verifyTokenByHeader, getTransfersController);
 transfer_router.get('/gettransferbyid/:transferId', verifyTokenByHeader, getTransferByIdController);
-transfer_router.delete('/deletetransfer/:transferId', verifyToken, deleteTransferController);
+transfer_router.delete('/deletetransfer/:transferId', verifyTokenByHeader, deleteTransferController);
 
 export default transfer_router;

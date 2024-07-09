@@ -91,7 +91,9 @@ export const getTransferById = async (transferId: string) => {
 //delete transfer by transfer id
 export const deleteTransfer = async (transferId: string) => {
     try {
-        await Transfer.deleteOne({ transferId: transferId });
+        console.log("transferId", transferId)
+        const result = await Transfer.deleteOne({ transferId: transferId });
+        console.log(`Deleted ${result.deletedCount} transfer(s)`);
         return "Deleted";
     } catch (error) {
         console.error('Error deleting transfer:', (error as Error).message);

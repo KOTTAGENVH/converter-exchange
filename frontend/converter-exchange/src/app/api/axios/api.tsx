@@ -2,10 +2,12 @@
 import axios from "axios";
 //Api Client
 const apiClient = axios.create({
-  baseURL: "https://tecsota-assessment.vercel.app",
+  baseURL: "http://localhost:5050",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
   },
 });
 export { apiClient };
+
+//https://tecsota-assessment.vercel.app

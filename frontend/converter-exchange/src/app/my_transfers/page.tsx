@@ -22,6 +22,7 @@ import {
 interface RowData {
   _id: string;
   date: string;
+  transferId: string;
 }
 
 // Columns for the table
@@ -84,7 +85,7 @@ const getColumns = (deleteTransferHandler: (id: string) => void): MRT_ColumnDef<
       <div>
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => deleteTransferHandler(row.original._id)}
+          onClick={() => deleteTransferHandler(row.original.transferId)}
         >
           Revoke
         </button>
@@ -243,7 +244,7 @@ export default function Page() {
             </div>
           )}
         </div>
-        <div className="flex flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="flex flex-1 overflow-y-auto overflow-x-hidden justify-center items-center">
         <MaterialReactTable table={table} />
         </div>
       </div>

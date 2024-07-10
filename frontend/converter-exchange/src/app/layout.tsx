@@ -27,7 +27,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         {/* Ban inspect elements */}
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               document.addEventListener("contextmenu", function(event) {
@@ -36,7 +36,7 @@ export default function RootLayout({
               });
             `,
           }}
-        />
+        /> */}
         <QueryClientProvider client={queryClient}>
           <Providers>
             {children}

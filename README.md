@@ -1,4 +1,5 @@
 # Converter Exchange
+>Converter Exhange is a small webapplication which could transfer payment to a reciepent registered in the system and also convert based on the exchange rate data provided by ExchangeRate-API.
 ## Demo Link: 
 >
 ## Hosted Link(Frontend): https://converter-exchange.vercel.app/
@@ -18,8 +19,6 @@
 >>
 >![Screenshot 2024-07-10 at 15 29 04](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/b31b268a-aa5b-4615-a187-3599d2bd8dbd)
 
-
->Converter Exhange is a small webapplication which could transfer payment to a reciepent registered in the system and also convert based on the exchange rate data provided by ExchangeRate-API.
 ## Technologies used
 - Backend: Node js
 - Hashing: Bcrypt js

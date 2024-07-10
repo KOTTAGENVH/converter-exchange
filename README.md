@@ -104,7 +104,7 @@ npm i
 ```
 - Add environment varaibles
 ```
-database = "Add your mongo db url here"
+database = "Add your mongo db uri here"
 PORT = 5050
 secret = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5vdmVua290dGFnZUBnbWFpbC5jb20iLCJpZCI6IjY2ODYzNTg3ZmE0NzIyMDdlY2NlZGNhYSIsImlhdCI6MTcyMDExNzAxNywiZXhwIjoxNzIwMTUzMDE3fQ.c85vb8djYTs3C6kMrCCpHGHqtLR-NO_5ZgeH8FfgGwk
 refreshtoken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5vdmVua290dGFnZUBnbWFpbC5jb20iLCJpZCI6IjY2ODYzNTg3ZmE0NzIyMDdlY2NlZGNhYSIsImlhdCI6MTcyMDExNzAxNywiZXhwIjoxNzIwMTIwNjE3fQ.3RTL8FTGbIfWbf_oTt71lPtWNm8_qekRafGXTwCFY8s

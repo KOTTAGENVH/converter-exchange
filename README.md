@@ -1,11 +1,26 @@
 # Converter Exchange
-##Demo Link:
+## Demo Link: 
 >
-##Hosted Link(Frontend): https://converter-exchange.vercel.app/
+## Hosted Link(Frontend): https://converter-exchange.vercel.app/
 >
-##Hosted Link(Backend): https://tecsota-assessment.vercel.app/
+## Hosted Link(Backend): https://tecsota-assessment.vercel.app/
+>
+## Desktop View
+>![Screenshot 2024-07-10 at 15 26 35](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/5e228187-9caa-4857-8cf4-c787db7f3904)
+>>
+>![Screenshot 2024-07-10 at 15 26 58](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/3d68fb0a-7f7c-49c6-8786-6ab45ede2851)
+## Mobile View
+>![Screenshot 2024-07-10 at 15 28 11](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/b8f5ff08-9c73-45a3-b3ef-771770129da6)
+>>
+>![Screenshot 2024-07-10 at 15 28 38](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/5ccf4f73-6c57-43e3-807f-9ff3c621f90e)
+>>
+>![Screenshot 2024-07-10 at 15 28 55](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/656f4919-2ba1-49ff-baeb-4600b4add84b)
+>>
+>![Screenshot 2024-07-10 at 15 29 04](https://github.com/KOTTAGENVH/converter-exchange/assets/87430226/b31b268a-aa5b-4615-a187-3599d2bd8dbd)
+
+
 >Converter Exhange is a small webapplication which could transfer payment to a reciepent registered in the system and also convert based on the exchange rate data provided by ExchangeRate-API.
-##Technologies used
+## Technologies used
 - Backend: Node js
 - Hashing: Bcrypt js
 - Authentication: JWT
@@ -17,9 +32,9 @@
 - Database: Mongo DB(NoSQL)
 - Email: Email js
 
-##Project Structure
+## Project Structure
 >
-##Frontend
+## Frontend
 ```
 CONVERTER-EXCHANGE/
 ├── README.md
@@ -39,7 +54,7 @@ CONVERTER-EXCHANGE/
 └── tsconfig.json
 ```
 >
-##Backend
+## Backend
 ```
 ├── package-lock.json
 ├── package.json

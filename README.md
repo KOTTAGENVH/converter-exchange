@@ -12,3 +12,21 @@
 - Chart: Material React Table
 - Database: Mongo DB(NoSQL)
 
+##Project Structure
+##Frontend
+CONVERTER-EXCHANGE/
+├── README.md
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── converter.png
+│   ├── next.svg
+│   └── vercel.svg
+├── src
+│   ├── app
+│   └── components
+├── tailwind.config.ts
+└── tsconfig.json

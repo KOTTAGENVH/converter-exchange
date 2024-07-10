@@ -13,7 +13,7 @@
 - Database: Mongo DB(NoSQL)
 
 ##Project Structure
-##Frontend
+###Frontend
 ```
 CONVERTER-EXCHANGE/
 ├── README.md
@@ -32,3 +32,4 @@ CONVERTER-EXCHANGE/
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
+
